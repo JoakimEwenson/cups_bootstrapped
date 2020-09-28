@@ -1,44 +1,53 @@
-<H2 CLASS="title">Add Printer</H2>
+<h2>Add Printer</h2>
 
-<FORM METHOD="POST" ACTION="/admin">
-<INPUT TYPE="HIDDEN" NAME="org.cups.sid" VALUE="{$org.cups.sid}">
-<INPUT TYPE="HIDDEN" NAME="OP" VALUE="{op}">
-<INPUT TYPE="HIDDEN" NAME="BAUDRATE" VALUE="{?baudrate}">
-<INPUT TYPE="HIDDEN" NAME="BITS" VALUE="{?bits}">
-<INPUT TYPE="HIDDEN" NAME="PARITY" VALUE="{?parity}">
-<INPUT TYPE="HIDDEN" NAME="FLOW" VALUE="{?flow}">
-{?current_make!?<INPUT TYPE="HIDDEN" NAME="CURRENT_MAKE" VALUE="{current_make}">:}
-{?current_make_and_model!?<INPUT TYPE="HIDDEN" NAME="CURRENT_MAKE_AND_MODEL" VALUE="{current_make_and_model}">:}
+<form method="POST" action="/admin">
+    <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+    <input type="HIDDEN" name="OP" value="{op}">
+    <input type="HIDDEN" name="BAUDRATE" value="{?baudrate}">
+    <input type="HIDDEN" name="BITS" value="{?bits}">
+    <input type="HIDDEN" name="PARITY" value="{?parity}">
+    <input type="HIDDEN" name="FLOW" value="{?flow}">
+    {?current_make!?<input type="HIDDEN" name="CURRENT_MAKE" value="{current_make}">:}
+    {?current_make_and_model!?<input type="HIDDEN" name="CURRENT_MAKE_AND_MODEL" value="{current_make_and_model}">:}
 
-<TABLE>
-<TR>
-<TH CLASS="label">Name:</TH>
-<TD><INPUT TYPE="TEXT" NAME="PRINTER_NAME" SIZE="40" MAXLENGTH="127" VALUE="{?template_name}"><BR>
-<SMALL>(May contain any printable characters except "/", "#", and space)</SMALL></TD>
-</TR>
-<TR>
-<TH CLASS="label">Description:</TH>
-<TD><INPUT TYPE="TEXT" NAME="PRINTER_INFO" SIZE="40" MAXLENGTH="127" VALUE="{?PRINTER_INFO}"><BR>
-<SMALL>(Human-readable description such as "HP LaserJet with Duplexer")</SMALL></TD>
-</TR>
-<TR>
-<TH CLASS="label">Location:</TH>
-<TD><INPUT TYPE="TEXT" NAME="PRINTER_LOCATION" SIZE="40" MAXLENGTH="127" VALUE="{?PRINTER_LOCATION}"><BR>
-<SMALL>(Human-readable location such as "Lab 1")</SMALL></TD>
-</TR>
-<TR>
-<TH CLASS="label">Connection:</TH>
-<TD><INPUT TYPE="HIDDEN" NAME="DEVICE_URI" VALUE="{device_uri}">{device_uri}</TD>
-</TR>
-<TR>
-<TH CLASS="label">Sharing:</TH>
-<TD><INPUT TYPE="CHECKBOX" NAME="PRINTER_IS_SHARED" {PRINTER_IS_SHARED=1?CHECKED:}>
-Share This Printer</TD>
-</TR>
-<TR>
-<TD></TD>
-<TD><INPUT TYPE="SUBMIT" VALUE="Continue"></TD>
-</TR>
-</TABLE>
-
-</FORM>
+    <table class="table table-borderless p-0 m-0">
+        <tr>
+            <th>Name:</th>
+            <td><input type="TEXT" class="form-control" name="PRINTER_NAME" size="40" maxlength="127" value="{?template_name}">
+            <small class="form-text text-muted">(May contain any printable characters except "/", "#", and space)</small></td>
+        </tr>
+        <tr>
+            <th>Description:</th>
+            <td>
+                <input type="TEXT" class="form-control" name="PRINTER_INFO" size="40" maxlength="127" value="{?PRINTER_INFO}">
+                <small class="form-text text-muted">(Human-readable description such as "HP LaserJet with Duplexer")</small>
+            </td>
+        </tr>
+        <tr>
+            <th>Location:</th>
+            <td>
+                <input type="TEXT" class="form-control" name="PRINTER_LOCATION" size="40" maxlength="127" value="{?PRINTER_LOCATION}">
+                <small class="form-text text-muted">(Human-readable location such as "Lab 1")</small></td>
+        </tr>
+        <tr>
+            <th>Connection:</th>
+            <td>
+                <input type="HIDDEN" name="DEVICE_URI" value="{device_uri}">{device_uri}</td>
+        </tr>
+        <tr>
+            <th>Sharing:</th>
+            <td>
+                <div class="custom-control custom-checkbox">
+                    <input type="CHECKBOX" class="custom-control-input" id="PRINTER_IS_SHARED" name="PRINTER_IS_SHARED" {PRINTER_IS_SHARED=1?CHECKED:}>
+                    <label class="custom-control-label" for="PRINTER_IS_SHARED">Share This Printer</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="SUBMIT" class="btn btn-primary" value="Continue">
+            </td>
+        </tr>
+    </table>
+</form>

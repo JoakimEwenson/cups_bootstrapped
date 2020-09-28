@@ -1,12 +1,12 @@
-<H2 CLASS="title">Set Default Options for {printer_name}</H2>
+<h2 >Set Default Options for {printer_name}</h2>
 
-<FORM METHOD="POST" ACTION="/admin">
-<INPUT TYPE="HIDDEN" NAME="org.cups.sid" VALUE="{$org.cups.sid}">
-<INPUT TYPE="HIDDEN" NAME="PRINTER_NAME" VALUE="{printer_name}">
-<INPUT TYPE="HIDDEN" NAME="OP" VALUE="{op}">
-{HAVE_AUTOCONFIGURE?<INPUT TYPE="SUBMIT" NAME="AUTOCONFIGURE" VALUE="Query Printer for Default Options">:}
+<form method="POST" action="/admin">
+<input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+<input type="HIDDEN" name="PRINTER_NAME" value="{printer_name}">
+<input type="HIDDEN" name="OP" value="{op}">
+{HAVE_AUTOCONFIGURE?<input type="SUBMIT" name="AUTOCONFIGURE" value="Query Printer for Default Options">:}
 
-<SCRIPT TYPE="text/javascript"><!--
+<script type="text/javascript">
 function update_paramtable(option)
 {
   var cb = document.getElementById("select-" + option)
@@ -16,9 +16,6 @@ function update_paramtable(option)
   else
     paramstable.style.display = "none";
 }
---></SCRIPT>
+</script>
 
-<H3 CLASS="title">{[group_id]
-<A HREF="#{group_id}">{group}</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</H3>
-
-<DIV CLASS="tabs">
+<h3>{[group_id]</h3>

@@ -1,58 +1,78 @@
-<H2 CLASS="title">{op=modify-printer?Modify {printer_name}:Add Printer}</H2>
+<h2 class="title">{op=modify-printer?Modify {printer_name}:Add Printer}</h2>
 
-<FORM METHOD="POST" ACTION="/admin" ENCTYPE="multipart/form-data">
-<INPUT TYPE="HIDDEN" NAME="org.cups.sid" VALUE="{$org.cups.sid}">
-<INPUT TYPE="HIDDEN" NAME="OP" VALUE="{op}">
-{printer_name?<INPUT TYPE="HIDDEN" NAME="printer_name" VALUE="{printer_name}">:}
-<INPUT TYPE="HIDDEN" NAME="BAUDRATE" VALUE="{?baudrate}">
-<INPUT TYPE="HIDDEN" NAME="BITS" VALUE="{?bits}">
-<INPUT TYPE="HIDDEN" NAME="PARITY" VALUE="{?parity}">
-<INPUT TYPE="HIDDEN" NAME="FLOW" VALUE="{?flow}">
-<TABLE>
-{op=modify-printer?:<TR>
-<TH CLASS="label">Name:</TH>
-<TD><INPUT TYPE="HIDDEN" NAME="PRINTER_NAME" VALUE="{printer_name}">{printer_name}</TD>
-</TR>}
-<TR>
-<TH CLASS="label">Description:</TH>
-<TD><INPUT TYPE="HIDDEN" NAME="PRINTER_INFO" VALUE="{printer_info}">{printer_info}</TD>
-</TR>
-<TR>
-<TH CLASS="label">Location:</TH>
-<TD><INPUT TYPE="HIDDEN" NAME="PRINTER_LOCATION" VALUE="{printer_location}">{printer_location}</TD>
-</TR>
-<TR>
-<TH CLASS="label">Connection:</TH>
-<TD><INPUT TYPE="HIDDEN" NAME="DEVICE_URI" VALUE="{device_uri}">{device_uri}</TD>
-</TR>
-<TR>
-<TH CLASS="label">Sharing:</TH>
-<TD><INPUT TYPE="HIDDEN" NAME="PRINTER_IS_SHARED" VALUE="{?printer_is_shared}">
-{?printer_is_shared=?Do Not:{?printer_is_shared=0?Do Not:}} Share This Printer</TD>
-</TR>
-<TR>
-<TH CLASS="label">Make:</TH>
-<TD>{PPD_MAKE} <INPUT TYPE="SUBMIT" NAME="SELECT_MAKE" VALUE="Select Another Make/Manufacturer"></TD>
-</TR>
-<TR>
-<TH CLASS="label">Model:</TH>
-<TD>
-<SELECT NAME="PPD_NAME" SIZE="10">
-{op=add-printer?:<OPTION VALUE="__no_change__" SELECTED>Current Driver - {current_make_and_model}</OPTION>:}
-{show_ipp_everywhere?<OPTION VALUE="everywhere" SELECTED>{current_make_and_model} - IPP Everywhere &trade;</OPTION>:}
-{[ppd_name]<OPTION VALUE="{ppd_name}" {op=modify-printer?:{?current_make_and_model={ppd_make_and_model}?SELECTED:}}>{ppd_make_and_model} ({ppd_natural_language})
-}</SELECT>
-</TD>
-</TR>
-<TR>
-<TH CLASS="label">Or Provide a PPD File:</TH>
-<TD><INPUT TYPE="HIDDEN" NAME="MAX_FILE_SIZE" VALUE="262144"><INPUT
-TYPE="FILE" NAME="PPD_FILE"></TD>
-</TR>
-<TR>
-<TD></TD>
-<TD><INPUT TYPE="SUBMIT" VALUE="{op=add-printer?Add Printer:Modify Printer}"></TD>
-</TR>
-</TABLE>
+<form method="POST" action="/admin" ENCtype="multipart/form-data">
+    <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+    <input type="HIDDEN" name="OP" value="{op}">
+    {printer_name?<input type="HIDDEN" name="printer_name" value="{printer_name}">:}
+    <input type="HIDDEN" name="BAUDRATE" value="{?baudrate}">
+    <input type="HIDDEN" name="BITS" value="{?bits}">
+    <input type="HIDDEN" name="PARITY" value="{?parity}">
+    <input type="HIDDEN" name="FLOW" value="{?flow}">
 
-</FORM>
+    <table class="table table-borderless m-0 p-0">
+        {op=modify-printer?:<tr>
+        <th>Name:</th>
+        <td>
+            <input type="HIDDEN" name="PRINTER_NAME" value="{printer_name}">{printer_name}
+        </td>
+        </tr>}
+        <tr>
+        <th>Description:</th>
+        <td>
+            <input type="HIDDEN" name="PRINTER_INFO" value="{printer_info}">{printer_info}
+        </td>
+        </tr>
+        <tr>
+        <th>Location:</th>
+        <td>
+            <input type="HIDDEN" name="PRINTER_LOCATION" value="{printer_location}">{printer_location}
+        </td>
+        </tr>
+        <tr>
+        <th>Connection:</th>
+        <td>
+            <input type="HIDDEN" name="DEVICE_URI" value="{device_uri}">{device_uri}
+        </td>
+        </tr>
+        <tr>
+        <th>Sharing:</th>
+        <td>
+            <input type="HIDDEN" name="PRINTER_IS_SHARED" value="{?printer_is_shared}">
+            {?printer_is_shared=?Do Not:{?printer_is_shared=0?Do Not:}} Share This Printer
+        </td>
+        </tr>
+        <tr>
+            <th class="align-middle">Make:</th>
+            <td class="align-middle">
+                {PPD_MAKE} <input type="SUBMIT" class="btn btn-primary" name="select_MAKE" value="Select Another Make/Manufacturer">
+            </td>
+        </tr>
+        <tr>
+            <th>Model:</th>
+            <td>
+                <select name="PPD_NAME" class="custom-select" size="10">
+                {op=add-printer?:<option value="__no_change__" selected>Current Driver - {current_make_and_model}</option>:}
+                {show_ipp_everywhere?<option value="everywhere" selected>{current_make_and_model} - IPP Everywhere &trade;</option>:}
+                {[ppd_name]<option value="{ppd_name}" {op=modify-printer?:{?current_make_and_model={ppd_make_and_model}?selected:}}>{ppd_make_and_model} ({ppd_natural_language})
+                }</select>
+            </td>
+        </tr>
+        <tr>
+            <th>Or Provide a PPD File:</th>
+            <td>
+                <div class="custom-file">
+                    <input type="HIDDEN" name="MAX_FILE_SIZE" value="262144">
+                    <input type="FILE" id="PPD_FILE" name="PPD_FILE">
+                    <label class="custom-file-label" for="PPD_FILE">Choose file</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="SUBMIT" class="btn btn-primary" value="{op=add-printer?Add Printer:Modify Printer}">
+            </td>
+        </tr>
+    </table>
+
+</form>

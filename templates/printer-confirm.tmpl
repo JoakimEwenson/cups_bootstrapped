@@ -1,6 +1,17 @@
-<H2 CLASS="title">Delete Printer {printer_name}</H2>
+<div class="container my-3">
+    <h2>Delete Printer {printer_name}</h2>
+    <div class="alert alert-danger" role="alert">
+        <b>Warning:</b> Are you sure you want to delete printer
+        {printer_name}?
+    </div>
+    
 
-<P><B>Warning:</B> Are you sure you want to delete printer
-{printer_name}?</P>
-
-<P ALIGN="CENTER"><FORM ACTION="/admin/" METHOD="POST"><INPUT TYPE="HIDDEN" NAME="org.cups.sid" VALUE="{$org.cups.sid}"><INPUT TYPE="HIDDEN" NAME="OP" VALUE="delete-printer"><INPUT TYPE="HIDDEN" NAME="printer_name" VALUE="{printer_name}"><INPUT TYPE="SUBMIT" NAME="confirm" VALUE="Delete Printer"></FORM></P>
+    <div class="text-center mx-auto">
+        <form ACTION="/admin/" method="POST">
+            <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+            <input type="HIDDEN" name="OP" value="delete-printer">
+            <input type="HIDDEN" name="printer_name" value="{printer_name}">
+            <input type="SUBMIT" class="btn btn-danger" name="confirm" value="Delete Printer">
+        </form>
+    </div>
+</div>

@@ -1,5 +1,6 @@
-<H2 CLASS="title">Accept Jobs On {is_class?Class:Printer} {printer_name}</H2>
+<h2>Accept Jobs On {is_class?Class:Printer} {printer_name}</h2>
 
-<P>{is_class?Class:Printer} <A
-HREF="/{is_class?classes:printers}/{printer_name}">{printer_name}</A>
-is now accepting jobs.</P>
+<div class="alert alert-primary" role="alert">
+{is_class?Class:Printer} <a href="/{is_class?classes:printers}/{printer_name}">{printer_name}</a>
+is now accepting jobs.
+</div>

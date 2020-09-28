@@ -1,39 +1,44 @@
-<H2 CLASS="title">Modify {printer_name}</H2>
+<h2>Modify {printer_name}</h2>
 
-<FORM METHOD="POST" ACTION="/admin">
-<INPUT TYPE="HIDDEN" NAME="org.cups.sid" VALUE="{$org.cups.sid}">
-<INPUT TYPE="HIDDEN" NAME="OP" VALUE="{op}">
-<INPUT TYPE="HIDDEN" NAME="BAUDRATE" VALUE="{?baudrate}">
-<INPUT TYPE="HIDDEN" NAME="BITS" VALUE="{?bits}">
-<INPUT TYPE="HIDDEN" NAME="PARITY" VALUE="{?parity}">
-<INPUT TYPE="HIDDEN" NAME="FLOW" VALUE="{?flow}">
-<INPUT TYPE="HIDDEN" NAME="PRINTER_NAME" VALUE="{printer_name}">
+<form method="POST" action="/admin">
+    <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+    <input type="HIDDEN" name="OP" value="{op}">
+    <input type="HIDDEN" name="BAUDRATE" value="{?baudrate}">
+    <input type="HIDDEN" name="BITS" value="{?bits}">
+    <input type="HIDDEN" name="PARITY" value="{?parity}">
+    <input type="HIDDEN" name="FLOW" value="{?flow}">
+    <input type="HIDDEN" name="PRINTER_name" value="{printer_name}">
 
-<TABLE>
-<TR>
-<TH CLASS="label">Description:</TH>
-<TD><INPUT TYPE="TEXT" NAME="PRINTER_INFO" VALUE="{?printer_info}" SIZE="40" MAXLENGTH="127"><BR>
-<SMALL>(Human-readable description such as "HP LaserJet with Duplexer")</SMALL></TD>
-</TR>
-<TR>
-<TH CLASS="label">Location:</TH>
-<TD><INPUT TYPE="TEXT" NAME="PRINTER_LOCATION" VALUE="{?printer_location}" SIZE="40" MAXLENGTH="127"><BR>
-<SMALL>(Human-readable location such as "Lab 1")</SMALL></TD>
-</TR>
-<TR>
-<TH CLASS="label">Connection:</TH>
-<TD><INPUT TYPE="HIDDEN" NAME="DEVICE_URI" VALUE="{device_uri}">{device_uri}</TD>
-</TR>
-<TR>
-<TH CLASS="label">Sharing:</TH>
-<TD><INPUT TYPE="CHECKBOX" NAME="PRINTER_IS_SHARED" {PRINTER_IS_SHARED=1?CHECKED:}>
-Share This Printer</TD>
-</TR>
-<TR>
-<TR>
-<TD></TD>
-<TD><INPUT TYPE="SUBMIT" VALUE="Continue"></TD>
-</TR>
-</TABLE>
-
-</FORM>
+    <table class="table table-borderless p-0 m-0">
+    <tr>
+    <th class="label">Description:</th>
+    <td><input type="TEXT" class="form-control" name="PRINTER_INFO" value="{?printer_info}" size="40" maxlength="127">
+    <small class="form-text text-muted">(Human-readable description such as "HP LaserJet with Duplexer")</small></td>
+    </tr>
+    <tr>
+    <th class="label">Location:</th>
+    <td><input type="TEXT" class="form-control" name="PRINTER_LOCATION" value="{?printer_location}" size="40" maxlength="127">
+    <small class="form-text text-muted">(Human-readable location such as "Lab 1")</small></td>
+    </tr>
+    <tr>
+    <th class="label">Connection:</th>
+    <td><input type="HIDDEN" name="DEVICE_URI" value="{device_uri}">{device_uri}</td>
+    </tr>
+    <tr>
+    <th class="label">Sharing:</th>
+    <td>
+        <div class="form-check">
+            <input type="CHECKBOX" class="form-check-input" id="PRINTER_IS_SHARED" name="PRINTER_IS_SHARED" {PRINTER_IS_SHARED=1?CHECKED:}>
+            <label class="form-check-label" for="PRINTER_IS_SHARED">Share This Printer</label>
+        </div>
+    </td>
+    </tr>
+    <tr>
+    <tr>
+    <td></td>
+    <td>
+        <input type="SUBMIT" class="btn btn-primary" value="Continue">
+    </td>
+    </tr>
+    </table>
+</form>

@@ -1,49 +1,50 @@
-<H2 CLASS="title">{op=modify-printer?Modify {printer_name}:Add Printer}</H2>
+<h2>{op=modify-printer?Modify {printer_name}:Add Printer}</h2>
 
-{CUPS_GET_DEVICES_DONE?<FORM METHOD="POST" ACTION="/admin">
-<INPUT TYPE="HIDDEN" NAME="org.cups.sid" VALUE="{$org.cups.sid}">
-<INPUT TYPE="HIDDEN" NAME="OP" VALUE="{op}">
-{printer_name?<INPUT TYPE="HIDDEN" NAME="printer_name" VALUE="{printer_name}">:}
+{CUPS_GET_DEVICES_DONE?<form method="POST" action="/admin">
+<input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+<input type="HIDDEN" name="OP" value="{op}">
+{printer_name?<input type="HIDDEN" name="printer_name" value="{printer_name}">:}
 
-<TABLE>
-{op=add-printer?:<TR>
-<TH CLASS="label">Current Connection\:</TH>
-<TD><INPUT TYPE="RADIO" NAME="DEVICE_URI" VALUE="{current_device_uri}" CHECKED>
-{current_device_uri}</TD>
-</TR>}
-<TR>
-<TH CLASS="label">Local Printers\:</TH>
-<TD>
-{[device_uri]{device_class!network?<INPUT TYPE="RADIO" NAME="DEVICE_URI"
-VALUE="{device_uri}{?device_make_and_model!Unknown?|{device_make_and_model}:}">
-{device_info} {?device_make_and_model!Unknown?({device_make_and_model}):}<BR>
-:}}
-</TD>
-</TR>
-<TR>
-<TH CLASS="label">Discovered Network Printers\:</TH>
-<TD>
-{[device_uri]{device_class=network?{device_uri~[a-z]+://?<INPUT TYPE="RADIO" NAME="DEVICE_URI"
-VALUE="{device_uri}{?device_make_and_model!Unknown?|{device_make_and_model}:}">
-{device_info} {?device_make_and_model!Unknown?({device_make_and_model}):}<BR>
-:}:}}
-</TD>
-</TR>
-<TR>
-<TR>
-<TH CLASS="label">Other Network Printers\:</TH>
-<TD>
-{[device_uri]{device_class=network?{device_uri~[a-z]+://?:<INPUT TYPE="RADIO" NAME="DEVICE_URI"
-VALUE="{device_uri}{?device_make_and_model!Unknown?|{device_make_and_model}:}">
-{device_info} {?device_make_and_model!Unknown?({device_make_and_model}):}<BR>
-}:}}
-</TD>
-</TR>
-<TR>
-<TD></TD>
-<TD><INPUT TYPE="SUBMIT" VALUE="Continue"></TD>
-</TR>
-</TABLE>
+<table class="table table-borderless">
+    {op=add-printer?:<tr>
+        <th class="label">Current Connection\:</th>
+        <td>
+            <input type="RADIO" name="DEVICE_URI" value="{current_device_uri}" checked>
+            <label>{current_device_uri}</label>
+        </td>
+    </tr>}
+    <tr>
+        <th class="label">Local Printers\:</th>
+        <td>
+            {[device_uri]{device_class!network?
+            <input type="RADIO" id="DEVICE_URI" name="DEVICE_URI" value="{device_uri}{?device_make_and_model!Unknown?|{device_make_and_model}:}">
+            <label>{device_info} {?device_make_and_model!Unknown?({device_make_and_model}):}</label><br />
+            :}}
+        </td>
+    </tr>
+    <tr>
+        <th class="label">Discovered Network Printers\:</th>
+        <td>
+            {[device_uri]{device_class=network?{device_uri~[a-z]+://?
+            <input type="RADIO" id="DEVICE_URI" name="DEVICE_URI" value="{device_uri}{?device_make_and_model!Unknown?|{device_make_and_model}:}">
+            <label>{device_info} {?device_make_and_model!Unknown?({device_make_and_model}):}</label><br />
+            :}:}}
+        </td>
+    </tr>
+    <tr>
+    <tr>
+        <th class="label">Other Network Printers\:</th>
+        <td>
+            {[device_uri]{device_class=network?{device_uri~[a-z]+://?:
+            <input type="RADIO" id="DEVICE_URI" name="DEVICE_URI" value="{device_uri}{?device_make_and_model!Unknown?|{device_make_and_model}:}">
+            <label>{device_info} {?device_make_and_model!Unknown?({device_make_and_model}):}</label><br />
+            }:}}
+        </td>
+    </tr>
+    <tr>
+    <td></td>
+    <td><input type="SUBMIT" class="btn btn-primary" value="Continue"></td>
+    </tr>
+</table>
 
-</FORM>:<P><IMG SRC="/images/wait.gif" WIDTH="16" HEIGHT="16" ALIGN="ABSMIDDLE"
-ALT="Busy Indicator"> Looking for printers...</P>}
+</form>:<p><img src="/images/wait.gif" width="16" height="16" class="align-middle" alt="Busy Indicator"> Looking for printers...</p>}
