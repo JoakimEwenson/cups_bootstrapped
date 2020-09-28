@@ -1,0 +1,26 @@
+{#printer_name=0?:
+<div class="container-fluid table-responsive">
+    <table class="table table-borderless p-0 m-0" summary="Class List">
+    <thead class="bg-light">
+    <tr>
+        <th>Queue Name</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Members</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    {[printer_name]
+        <tr>
+            <td><a href="{printer_uri_supported}">{printer_name}</a></td>
+            <td>{printer_info}</td>
+            <td>{printer_location}</td>
+            <td>{?member_uris=?None:{member_uris}}</td>
+            <td>{printer_state=3?Idle:{printer_state=4?Processing:Paused}}{printer_state_message? - "{printer_state_message}":}</td>
+        </tr>
+    }
+    </tbody>
+    </table>
+</div>
+}

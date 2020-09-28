@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="shortcut icon" href="/apple-touch-icon.png" type="image/png">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    {refresh_page?<meta http-equiv="refresh" content="{refresh_page}">:}
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>html{display:none;}</style>
+    <script type="text/javascript">
+      /* Only display document if we are not in a frame... */
+      if (self == top) {
+        document.documentElement.style.display = 'block';
+      } else {
+        top.location = self.location;
+      }
+
+      /* Show an error if cookies are disabled */
+      function check_cookies() {
+        if (!navigator.cookieEnabled) {
+              document.getElementById('body').innerHTML = 'This page uses cookies to prevent common cross-site attacks. Please enable cookies in your browser.';
+        }
+      }
+      </script>
+    <title>{title} - CUPS 2.2.10</title>
+  </head>
+  <body onload="check_cookies();">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">CUPS Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto text-center">
+          <li class="nav-item">
+            <a {SECTION=admin?class="nav-link active" :}href="/admin" class="nav-link">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a {SECTION=classes?class="nav-link active" :}href="/classes/" class="nav-link">Classes</a>
+          </li>
+          <li class="nav-item">
+            <a {SECTION=jobs?class="nav-link active" :}href="/jobs/" class="nav-link">Jobs</a>
+          </li>
+          <li class="nav-item">
+            <a {SECTION=printers?class="nav-link active" :}href="/printers/" class="nav-link">Printers</a>
+          </li>
+          <li class="nav-item">
+            <a {SECTION=help?class="nav-link active" :}href="/help/" class="nav-link">Help</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="body container my-2">

@@ -1,0 +1,7 @@
+<div class="container my-2">
+    {?which_jobs=?:<form action="{?printer_name=?/jobs:{printer_uri_supported}}" method="GET"><input type="SUBMIT" class="btn btn btn btn-outline-primary m-2" value="Show Active Jobs"></form>}
+    {?which_jobs=completed?:<form action="{?printer_name=?/jobs:{printer_uri_supported}}" method="GET"><input type="HIDDEN" name="which_jobs" value="completed"><input type="SUBMIT" class="btn btn btn btn-outline-primary m-2" value="Show Completed Jobs"></form>}
+    {?which_jobs=all?:<form action="{?printer_name=?/jobs:{printer_uri_supported}}" method="GET"><input type="HIDDEN" name="which_jobs" value="all"><input type="SUBMIT" class="btn btn btn btn-outline-primary m-2" value="Show All Jobs"></form>}
+
+    <p class="text-center">{?which_jobs=?Jobs listed in print order; held jobs appear first.:{which_jobs=Jobs listed in ascending order.?:Jobs listed in descending order.}}</p>
+</div>

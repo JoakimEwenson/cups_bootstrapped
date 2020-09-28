@@ -1,0 +1,91 @@
+{#job_id=0?:
+    <div class="container-fluid table-responsive">
+    <table class="table table-borderless p-0 m-0" summary="Job List">
+        <thead class="bg-light">
+            <tr>
+                <th>Printer</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>User</th>
+                <th>Size</th>
+                <th>Pages</th>
+                <th>State</th>
+                <th>Control</th>
+            </tr>
+        </thead>
+        <tbody>
+        {[job_id]
+            <tr class="align-top">
+                <td>
+                    <a href="{?job_printer_uri}">{?job_printer_name}</a>
+                </td>
+                <td>
+                    {?job_id}
+                </td>
+                <td>
+                    {?job_name=?Unknown:{job_name}}
+                </td>
+                <td>
+                    {?job_originating_user_name=?Withheld:{job_originating_user_name}}
+                </td>
+                <td>
+                    {job_k_octets}k
+                </td>
+                <td>
+                    {job_impressions_completed=0?Unknown:{?job_impressions_completed}}
+                </td>
+                <td>
+                    {job_state=3?pending since<br />
+                    {?time_at_creation=?Unknown:{time_at_creation}}:{job_state=4?held since<br />
+                    {?time_at_creation=?Unknown:{time_at_creation}}:
+                    {job_state=5?processing since<br />
+                    {?time_at_processing=?Unknown:{time_at_processing}}:{job_state=6?stopped:
+                    {job_state=7?canceled at<br />
+                    {?time_at_completed=?Unknown:{time_at_completed}}:{job_state=8?aborted:completed at<br />
+                    {?time_at_completed=?Unknown:{time_at_completed}}}}}}}}{job_printer_state_message?<br />
+                    <em>"{job_printer_state_message}"</em>:}
+                </td>
+                <td class="text-center">
+                    {job_preserved>0?{job_state>5?
+                    <form action="/jobs/" method="POST">
+                        <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+                        <input type="HIDDEN" name="OP" value="restart-job">
+                        <input type="HIDDEN" name="job_id" value="{job_id}">
+                        <input type="HIDDEN" name="job_printer_uri" value="{job_printer_uri}">
+                        <input type="SUBMIT" class="btn btn btn btn-outline-primary my-2" value="Reprint Job">
+                    </form>:}:}
+                    {job_state=4?
+                    <form action="/jobs/" method="POST">
+                        <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+                        <input type="HIDDEN" name="OP" value="release-job">
+                        <input type="HIDDEN" name="job_id" value="{job_id}">
+                        <input type="HIDDEN" name="job_printer_uri" value="{job_printer_uri}">
+                        <input type="SUBMIT" class="btn btn btn btn-outline-primary my-2" value="Release Job">
+                    </form>:}
+                    {job_state=3?
+                    <form action="/jobs/" method="POST">
+                        <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+                        <input type="HIDDEN" name="OP" value="hold-job">
+                        <input type="HIDDEN" name="job_id" value="{job_id}">
+                        <input type="HIDDEN" name="job_printer_uri" value="{job_printer_uri}">
+                        <input type="SUBMIT" class="btn btn btn btn-outline-primary my-2" value="Hold Job">
+                    </form>:}
+                    {job_state<7?
+                    <form action="/jobs/" method="POST">
+                        <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+                        <input type="HIDDEN" name="OP" value="cancel-job">
+                        <input type="HIDDEN" name="job_id" value="{job_id}">
+                        <input type="HIDDEN" name="job_printer_uri" value="{job_printer_uri}">
+                        <input type="SUBMIT" class="btn btn btn btn-outline-primary my-2" value="Cancel Job">
+                    </form>
+                    <form action="/jobs/" method="POST">
+                        <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+                        <input type="HIDDEN" name="OP" value="move-job">
+                        <input type="HIDDEN" name="job_id" value="{job_id}">
+                        <input type="SUBMIT" class="btn btn btn btn-outline-primary my-2" value="Move Job">
+                    </form>:}
+                </td>
+            </tr>}
+        </tbody>
+    </table>
+</div>}

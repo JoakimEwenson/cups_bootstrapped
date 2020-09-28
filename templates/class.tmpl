@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="container">
+        <h2>Class: <a href="{printer_uri_supported}">{printer_name}</a></h2>
+        <p><small class="text-muted">({printer_state=3?Idle:{printer_state=4?Processing:Paused}},
+        {printer_is_accepting_jobs=0?Rejecting Jobs:Accepting Jobs},
+        {server_is_sharing_printers=0?Not:{printer_is_shared=0?Not:}} Shared{default_name={printer_name}?, Server Default:})</small></p>
+
+        <form method="POST" action="{printer_uri_supported}" name="maintenance">
+            <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+            <select class="custom-select my-2" name="OP" onchange="document.maintenance.submit();">
+                <option value="">Maintenance</option>
+                <option value="print-test-page">Print Test Page</option>
+                {printer_state=5?<option value="start-class">Resume Class</option>:<option value="stop-class">Pause Class</option>}
+                {printer_is_accepting_jobs=0?<option value="accept-jobs">Accept Jobs</option>:<option value="reject-jobs">Reject Jobs</option>}
+                <option value="move-jobs">Move All Jobs</option>
+                <option value="purge-jobs">Cancel All Jobs</option>
+            </select>
+            <input type="SUBMIT" value="Go" STYLE="display: none;">
+        </form>
+
+        <form method="POST" action="{admin_uri}" name="administration">
+            <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+            <input type="HIDDEN" name="printer_name" value="{printer_name}">
+            <input type="HIDDEN" name="IS_CLASS" value="1">
+            <select class="custom-select my-2" name="OP" onchange="document.administration.submit();">
+                <option value="">Administration</option>
+                <option value="modify-class">Modify Class</option>
+                <option value="delete-class">Delete Class</option>
+                <option value="set-class-options">Set Default Options</option>
+                <option value="set-as-default">Set As Server Default</option>
+                <option value="set-allowed-users">Set Allowed Users</option>
+            </select>
+            <input type="SUBMIT" value="Go" style="display: none;">
+        </form>
+
+        <table class="table table-borderless" summary="{printer_name}">
+            <tr>
+                <th>Description:</th>
+                <td>{printer_info}</td>
+            </tr>
+            <tr>
+                <th>Location:</th>
+                <td>{printer_location}</td>
+            </tr>
+            <tr>
+                <th>Members:</th>
+                <td>{?member_uris=?None:{member_uris}}</td>
+            </tr>
+            <tr>
+                <th>Defaults:</th>
+                <td>
+                    job-sheets={job_sheets_default}
+                    media={media_default?{media_default}:unknown}
+                    {sides_default?sides={sides_default}:}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

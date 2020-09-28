@@ -1,0 +1,20 @@
+<script type="text/javascript">
+function reset_config()
+{
+  document.cups.CUPSDCONF.value = "{?cupsdconf_default}";
+}
+</script>
+
+<h2 class="title">Edit Configuration File</h2>
+
+<form name="cups" method="POST" action="/admin/">
+<input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+<input type="HIDDEN" name="OP" value="config-server">
+
+<textarea name="CUPSDCONF" class="form-control my-2" cols="80" rows="25">{CUPSDCONF}</textarea>
+
+<p><input type="SUBMIT" class="btn btn btn btn-outline-primary" name="SAVECHANGES" value="Save Changes">
+<input type="BUTTON" class="btn btn btn btn-outline-primary" value="Use Default Configuration File"
+onClick="reset_config();"></p>
+
+</form>

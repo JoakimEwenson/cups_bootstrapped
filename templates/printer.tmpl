@@ -1,0 +1,45 @@
+<div class="container">
+    <h2>Printer: <a href="{printer_uri_supported}">{printer_name}</A></h2>
+    <p><small class="text-muted">({printer_state=3?Idle:{printer_state=4?Processing:Paused}},
+    {printer_is_accepting_jobs=0?Rejecting Jobs:Accepting Jobs},
+    {server_is_sharing_printers=0?Not:{printer_is_shared=0?Not:}} Shared{default_name={printer_name}?, Server Default:})</small></p>
+    
+    <form method="POST" action="{printer_uri_supported}" name="maintenance">
+    <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+    <select class="custom-select my-2" name="OP" onchange="document.maintenance.submit();">
+    <option value="">Maintenance</option>
+    <option value="print-test-page">Print Test Page</option>
+    {printer_commands~.*Clean.*?<option value="clean-print-heads">Clean Print Heads</option>:}
+    {printer_commands~.*PrintSelfTestPage.*?<option value="print-self-test-page">Print Self Test Page</option>:}
+    {printer_state=5?<option value="start-printer">Resume Printer</option>:<option value="stop-printer">Pause Printer</option>}
+    {printer_is_accepting_jobs=0?<option value="accept-jobs">Accept Jobs</option>:<option value="reject-jobs">Reject Jobs</option>}
+    <option value="move-jobs">Move All Jobs</option>
+    <option value="cancel-jobs">Cancel All Jobs</option>
+    </select>
+    <noscript><input type="SUBMIT" value="Go"></noscript>
+    </form>
+    
+    <form method="POST" action="{admin_uri}" name="administration">
+    <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+    <input type="HIDDEN" name="printer_name" value="{printer_name}">
+    <select class="custom-select my-2" name="OP" onchange="document.administration.submit();">
+    <option value="">Administration</option>
+    <option value="modify-printer">Modify Printer</option>
+    <option value="delete-printer">Delete Printer</option>
+    <option value="set-printer-options">Set Default Options</option>
+    <option value="set-as-default">Set As Server Default</option>
+    <option value="set-allowed-users">Set Allowed Users</option>
+    </select>
+    <noscript><input type="SUBMIT" value="Go"></noscript>
+    </form>
+    
+    <table class="table table-borderless" summary="{printer_name}">
+    <tr><th>Description:</th><td>{printer_info}</td></tr>
+    <tr><th>Location:</th><td>{printer_location}</td></tr>
+    <tr><th>Driver:</th><td>{printer_make_and_model} ({color_supported=1?color:grayscale}{sides_supported=one-sided?:, 2-sided printing})<BR>
+    <tr><th>Connection:</th><td>{device_uri}</td></tr>
+    <tr><th>Defaults:</th><td>job-sheets={job_sheets_default}
+    media={media_default?{media_default}:unknown}
+    {sides_default?sides={sides_default}:}</td></tr>
+    </table>
+</div>

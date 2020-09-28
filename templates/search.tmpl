@@ -1,0 +1,13 @@
+<div class="container-fluid text-center my-2">
+    <form class="form-inline" action="/{SECTION}/{?SEARCH_DEST}" method="GET">
+    {WHICH_JOBS?<input type="HIDDEN" class="form-control" name="WHICH_JOBS" value="{WHICH_JOBS}">:}
+    {ORDER?<input type="HIDDEN" class="form-control" name="ORDER" value="{ORDER}">:}
+        <p class="mx-auto">
+            <b>Search in
+            {SEARCH_DEST?{SEARCH_DEST}:{SECTION=classes?Classes:{SECTION=jobs?Jobs:Printers}}}:</b><br />
+                <input type="SEARCH" class="form-control my-2" name="QUERY" value="{?QUERY}" size="40" placeholder="" autosave="org.cups.{SECTION}" results="20">
+                <input type="SUBMIT" class="btn btn btn btn-primary my-2" value="Search">
+                <input type="SUBMIT" class="btn btn btn btn-danger my-2" name="CLEAR" value="Clear">
+        </p>
+    </form>
+</div>

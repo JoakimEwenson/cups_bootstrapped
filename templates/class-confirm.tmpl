@@ -1,0 +1,15 @@
+
+<div class="alert alert-danger" role="alert">
+    <h2 class="title">Delete Class {printer_name}</h2>
+    <b>Warning:</b> Are you sure you want to delete class
+{printer_name}?
+</div>
+
+<div class="text-center">
+    <form action="/admin/" method="POST">
+        <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+        <input type="HIDDEN" name="op" value="delete-class">
+        <input type="HIDDEN" name="printer_name" value="{printer_name}">
+        <input type="SUBMIT" class="btn btn btn btn-danger m-2" name="confirm" value="Delete Class">
+    </form>
+</div>

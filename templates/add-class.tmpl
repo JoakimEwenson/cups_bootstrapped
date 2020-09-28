@@ -1,0 +1,53 @@
+<h2 class="title">Add Class</h2>
+
+<form method="POST" ACTION="/admin">
+  <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}" />
+  <input type="HIDDEN" name="OP" value="{op}" />
+
+  <div class="form-group">
+    <label for="PRINTER_NAME">Name:</label>
+    <input
+      type="TEXT"
+      class="form-control"
+      id="PRINTER_NAME"
+      name="PRINTER_NAME"
+      SIZE="40"
+      MAXLENGth="127"
+    />
+    <small class="form-text text-muted">(May contain any printable characters except "/", "#", and space)</small>
+  </div>
+  <div class="form-group">
+    <label for="PRINTER_INFO">Description:</label>
+    <input
+      type="TEXT"
+      class="form-control"
+      id="PRINTER_INFO"
+      name="PRINTER_INFO"
+      SIZE="40"
+      MAXLENGth="127"
+    />
+    <small class="form-text text-muted">(Human-readable description such as "HP LaserJet with Duplexer")</small>
+  </div>
+  <div class="form-group">
+    <label for="PRINTER_LOCATION">Location:</label>
+    <input
+      type="TEXT"
+      class="form-control"
+      id="PRINTER_LOCATION"
+      name="PRINTER_LOCATION"
+      SIZE="40"
+      MAXLENGth="127"
+    />
+    <small class="form-text text-muted">(Human-readable location such as "Lab 1")</small>
+  </div>
+  <div class="form-group">
+    <label for="MEMBER_URIS">Members:</label>
+    <select class="custom-select" name="MEMBER_URIS" id="MEMBER_URIS" size="10" multiple>
+      {[member_uris]
+      <option value="{member_uris}" {?member_selected}>{member_names}}</option>
+    </select>
+  </div>
+  <div class="container text-center">
+    <input type="SUBMIT" class="btn btn-primary" value="Add Class" />
+  </div>
+</form>
