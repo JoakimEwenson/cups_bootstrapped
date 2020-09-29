@@ -1,31 +1,29 @@
-<H2 CLASS="title">Modify Class {printer_name}</H2>
+<h2 class="title">Modify Class {printer_name}</h2>
 
-<FORM METHOD="POST" ACTION="/admin">
-<INPUT TYPE="HIDDEN" NAME="org.cups.sid" VALUE="{$org.cups.sid}">
-<INPUT TYPE="HIDDEN" NAME="OP" VALUE="{op}">
-<INPUT TYPE="HIDDEN" NAME="PRINTER_NAME" VALUE="{printer_name}">
+<form method="POST" action="/admin">
+  <input type="HIDDEN" name="org.cups.sid" value="{$org.cups.sid}">
+  <input type="HIDDEN" name="OP" value="{op}">
+  <input type="HIDDEN" name="PRINTER_NAME" value="{printer_name}">
 
-<TABLE>
-<TR>
-<TH CLASS="label">Description:</TH>
-<TD><INPUT TYPE="TEXT" NAME="PRINTER_INFO" VALUE="{?printer_info}" SIZE="40" MAXLENGTH="127"></TD>
-</TR>
-<TR>
-<TH CLASS="label">Location:</TH>
-<TD><INPUT TYPE="TEXT" NAME="PRINTER_LOCATION" VALUE="{?printer_location}" SIZE="40" MAXLENGTH="127"></TD>
-</TR>
-<TR>
-<TH CLASS="label">Members:</TH>
-<TD>
-<SELECT NAME="MEMBER_URIS" SIZE="10" MULTIPLE>
-{[member_uris]<OPTION VALUE="{member_uris}" {?member_selected}>{member_names}}
-</SELECT>
-</TD>
-</TR>
-<TR>
-<TD></TD>
-<TD><INPUT TYPE="SUBMIT" VALUE="Modify Class"></TD>
-</TR>
-</TABLE>
+  <div class="form-group">
+    <label for="">Description:</label>
+    <input type="TEXT" class="form-control" name="PRINTER_INFO" value="{?printer_info}" size="40" maxlength="127">
+  </div>
+  <div class="form-group">
+    <label for="">Location:</label>
+    <input type="TEXT" class="form-control" name="PRINTER_LOCATION" value="{?printer_location}" size="40"
+      maxlength="127">
+  </div>
+  <div class="form-group">
+    <label for="">Members:</label>
 
-</FORM>
+    <select class="custom-select" name="MEMBER_URIS" size="10" MULTIPLE>
+      {[member_uris]<OPTION value="{member_uris}" {?member_selected}>{member_names}}
+    </select>
+
+  </div>
+  <div class="form-group">
+    <input type="SUBMIT" class="btn btn-primary" value="Modify Class">
+  </div>
+
+</form>
